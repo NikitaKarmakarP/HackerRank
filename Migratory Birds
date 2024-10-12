@@ -1,0 +1,37 @@
+#include <stdio.h>
+
+int migratoryBirds(int n, int arr[]) {
+    int counts[6] = {0};  // Create an array to count bird sightings for bird types 1 through 5
+
+    // Count the sightings for each bird type
+    for (int i = 0; i < n; i++) {
+        counts[arr[i]]++;
+    }
+
+    // Find the bird type with the highest count. In case of a tie, the smallest ID wins.
+    int max_count = 0;
+    int bird_id = 0;
+    for (int i = 1; i <= 5; i++) {
+        if (counts[i] > max_count) {
+            max_count = counts[i];
+            bird_id = i;
+        }
+    }
+
+    return bird_id;
+}
+
+int main() {
+    int n;
+    scanf("%d", &n);  // Read the number of bird sightings
+
+    int arr[n];
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &arr[i]);  // Read each bird sighting
+    }
+
+    int result = migratoryBirds(n, arr);
+    printf("%d\n", result);
+
+    return 0;
+}
