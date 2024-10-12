@@ -1,0 +1,37 @@
+#include <stdio.h>
+
+const char* angryProfessor(int k, int a[], int n) {
+    int onTimeCount = 0;
+    
+    for (int i = 0; i < n; i++) {
+        if (a[i] <= 0) {
+            onTimeCount++;
+        }
+    }
+    
+    if (onTimeCount < k) {
+        return "YES";
+    } else {
+        return "NO";
+    }
+}
+
+int main() {
+    int t;
+    scanf("%d", &t);  // read number of test cases
+    
+    while (t--) {
+        int n, k;
+        scanf("%d %d", &n, &k);  // read number of students and threshold
+        
+        int a[n];
+        for (int i = 0; i < n; i++) {
+            scanf("%d", &a[i]);  // read arrival times
+        }
+        
+        const char* result = angryProfessor(k, a, n);
+        printf("%s\n", result);
+    }
+    
+    return 0;
+}
