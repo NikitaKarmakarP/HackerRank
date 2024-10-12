@@ -1,0 +1,45 @@
+#include <stdio.h>
+
+void climbingLeaderboard(int ranked[], int n, int player[], int m, int result[]) {
+    // Step 1: Create a list of unique scores in ranked
+    int unique_ranked[n];
+    int unique_count = 0;
+    unique_ranked[unique_count++] = ranked[0];
+    for (int i = 1; i < n; i++) {
+        if (ranked[i] != ranked[i - 1]) {
+            unique_ranked[unique_count++] = ranked[i];
+        }
+    }
+
+    // Step 2: Determine the player's rank for each score
+    int i = unique_count - 1; // Pointer for unique_ranked (start from the end)
+    for (int j = 0; j < m; j++) {
+        while (i >= 0 && player[j] >= unique_ranked[i]) {
+            i--; // Move the pointer to the left
+        }
+        result[j] = i + 2; // Rank is 1-based, and we need to add 2 because i is index-based and we need the next rank
+    }
+}
+
+int main() {
+    int n, m;
+    scanf("%d", &n);
+    int ranked[n];
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &ranked[i]);
+    }
+    scanf("%d", &m);
+    int player[m];
+    for (int i = 0; i < m; i++) {
+        scanf("%d", &player[i]);
+    }
+
+    int result[m];
+    climbingLeaderboard(ranked, n, player, m, result);
+
+    for (int i = 0; i < m; i++) {
+        printf("%d\n", result[i]);
+    }
+
+    return 0;
+}
