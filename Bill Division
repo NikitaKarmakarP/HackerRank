@@ -1,0 +1,33 @@
+#include <stdio.h>
+
+void bonAppetit(int bill[], int n, int k, int b) {
+    int sum = 0;
+    for (int i = 0; i < n; i++) {
+        if (i != k) {
+            sum += bill[i];
+        }
+    }
+    int annaShare = sum / 2;
+    if (annaShare == b) {
+        printf("Bon Appetit\n");
+    } else {
+        printf("%d\n", b - annaShare);
+    }
+}
+
+int main() {
+    int n, k;
+    scanf("%d %d", &n, &k);
+    
+    int bill[n];
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &bill[i]);
+    }
+    
+    int b;
+    scanf("%d", &b);
+    
+    bonAppetit(bill, n, k, b);
+    
+    return 0;
+}
