@@ -1,0 +1,26 @@
+#include <stdio.h>
+
+// Function to calculate the minimum number of pages to turn
+int pageCount(int n, int p) {
+    // Calculate turns from the front
+    int front_turns = p / 2;
+    
+    // Calculate turns from the back
+    int back_turns = (n / 2) - (p / 2);
+    
+    // Return the minimum of the two
+    return front_turns < back_turns ? front_turns : back_turns;
+}
+
+int main() {
+    int n, p;
+    
+    // Input the number of pages and the target page
+    scanf("%d", &n);
+    scanf("%d", &p);
+    
+    // Output the minimum number of pages to turn
+    printf("%d\n", pageCount(n, p));
+    
+    return 0;
+}
