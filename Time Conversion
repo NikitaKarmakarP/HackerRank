@@ -1,0 +1,36 @@
+#include <iostream>
+#include <sstream>
+#include <iomanip>
+using namespace std;
+
+string timeConversion(string s) {
+    int hour, minute, second;
+    char colon1, colon2, meridian1, meridian2;
+    
+    // Parsing the time
+    stringstream ss(s);
+    ss >> hour >> colon1 >> minute >> colon2 >> second >> meridian1 >> meridian2;
+
+    // Convert hour based on AM/PM
+    if (meridian1 == 'P' && hour != 12) {
+        hour += 12;
+    }
+    if (meridian1 == 'A' && hour == 12) {
+        hour = 0;
+    }
+
+    // Formatting the time in 24-hour format
+    stringstream militaryTime;
+    militaryTime << setw(2) << setfill('0') << hour << ":"
+                 << setw(2) << setfill('0') << minute << ":"
+                 << setw(2) << setfill('0') << second;
+    
+    return militaryTime.str();
+}
+
+int main() {
+    string time12hr;
+    cin >> time12hr;
+    cout << timeConversion(time12hr) << endl;
+    return 0;
+}
