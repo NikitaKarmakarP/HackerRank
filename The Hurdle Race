@@ -1,0 +1,31 @@
+#include <stdio.h>
+
+int hurdleRace(int k, int height[], int n) {
+    int max_height = height[0];
+    
+    // Find the maximum hurdle height
+    for (int i = 1; i < n; i++) {
+        if (height[i] > max_height) {
+            max_height = height[i];
+        }
+    }
+    
+    // Calculate the number of doses needed
+    int doses_needed = max_height - k;
+    return doses_needed > 0 ? doses_needed : 0;
+}
+
+int main() {
+    int n, k;
+    scanf("%d %d", &n, &k);
+    int height[n];
+    
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &height[i]);
+    }
+    
+    int result = hurdleRace(k, height, n);
+    printf("%d\n", result);
+    
+    return 0;
+}
