@@ -1,0 +1,57 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+// Comparison function for sorting
+int compare(const void *a, const void *b) {
+    return (*(int *)a - *(int *)b);
+}
+
+int flatlandSpaceStations(int n, int m, int c[]) {
+    // Sort the array of space stations
+    qsort(c, m, sizeof(int), compare);
+    
+    // Initialize the maximum distance variable
+    int max_distance = 0;
+
+    // Distance from the first city (0) to the first space station
+    max_distance = c[0];  // Distance from city 0 to the first space station
+
+    // Check distances between space stations
+    for (int i = 1; i < m; i++) {
+        // Calculate the middle distance between two space stations
+        int distance_between_stations = (c[i] - c[i - 1]) / 2;
+        if (distance_between_stations > max_distance) {
+            max_distance = distance_between_stations; // Update max_distance if needed
+        }
+    }
+
+    // Distance from the last city (n-1) to the last space station
+    int distance_to_last_station = (n - 1) - c[m - 1];
+    if (distance_to_last_station > max_distance) {
+        max_distance = distance_to_last_station; // Update max_distance if needed
+    }
+
+    return max_distance;
+}
+
+int main() {
+    int n, m;
+    
+    // Read number of cities and number of space stations
+    scanf("%d %d", &n, &m);
+    
+    int c[m]; // Array to store space station indices
+
+    // Read the indices of cities with space stations
+    for (int i = 0; i < m; i++) {
+        scanf("%d", &c[i]);
+    }
+
+    // Get the result from the function
+    int result = flatlandSpaceStations(n, m, c);
+    
+    // Print the result
+    printf("%d\n", result); // Output the maximum distance
+
+    return 0;
+}
