@@ -1,0 +1,31 @@
+#include <stdio.h>
+
+int findDigits(int n) {
+    int original = n; // Store the original value of n
+    int count = 0;
+
+    // Process each digit of the number
+    while (n > 0) {
+        int digit = n % 10; // Extract the last digit
+        n /= 10; // Remove the last digit
+
+        // Check if the digit divides the original number and is not zero
+        if (digit != 0 && original % digit == 0) {
+            count++;
+        }
+    }
+    return count;
+}
+
+int main() {
+    int t;
+    scanf("%d", &t); // Read the number of test cases
+
+    while (t--) {
+        int n;
+        scanf("%d", &n);
+        printf("%d\n", findDigits(n));
+    }
+
+    return 0;
+}
