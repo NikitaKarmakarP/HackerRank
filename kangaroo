@@ -1,0 +1,22 @@
+#include <stdio.h>
+
+const char* kangaroo(int x1, int v1, int x2, int v2) {
+    // If the kangaroos have the same jump distance but different starting positions, they will never meet
+    if (v1 == v2) {
+        return (x1 == x2) ? "YES" : "NO";
+    }
+
+    // Check if (x2 - x1) is divisible by (v1 - v2) and if the result is positive
+    if ((x2 - x1) % (v1 - v2) == 0 && (x2 - x1) / (v1 - v2) > 0) {
+        return "YES";
+    } else {
+        return "NO";
+    }
+}
+
+int main() {
+    int x1, v1, x2, v2;
+    scanf("%d %d %d %d", &x1, &v1, &x2, &v2);
+    printf("%s\n", kangaroo(x1, v1, x2, v2));
+    return 0;
+}
