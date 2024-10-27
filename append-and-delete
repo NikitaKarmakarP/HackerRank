@@ -1,0 +1,30 @@
+#include <stdio.h>
+#include <string.h>
+
+const char* appendAndDelete(char* s, char* t, int k) {
+    int len_s = strlen(s);
+    int len_t = strlen(t);
+    int common_length = 0;
+
+    // Find the common prefix length
+    while (common_length < len_s && common_length < len_t && s[common_length] == t[common_length]) {
+        common_length++;
+    }
+
+    // Calculate required deletions and additions
+    int total_operations = (len_s - common_length) + (len_t - common_length);
+
+    // Check if we can reach t from s in exactly k moves
+    if (total_operations == k || (total_operations < k && (k - total_operations) % 2 == 0) || (k >= len_s + len_t)) {
+        return "Yes";
+    }
+    return "No";
+}
+
+int main() {
+    char s[100], t[100];
+    int k;
+    scanf("%s %s %d", s, t, &k);
+    printf("%s\n", appendAndDelete(s, t, k));
+    return 0;
+}
