@@ -1,0 +1,42 @@
+#include <stdio.h>
+
+// Function to reverse an integer
+int reverse(int num) {
+    int reversed = 0;
+    while (num > 0) {
+        reversed = reversed * 10 + num % 10;
+        num /= 10;
+    }
+    return reversed;
+}
+
+// Function to count the beautiful days
+int beautifulDays(int i, int j, int k) {
+    int count = 0;
+
+    for (int day = i; day <= j; day++) {
+        int rev_day = reverse(day); // Reverse the day
+        int difference = day - rev_day; // Calculate the difference
+        if (difference < 0) {
+            difference = -difference; // Ensure the difference is positive
+        }
+
+        // Check if the difference is divisible by k
+        if (difference % k == 0) {
+            count++; // It's a beautiful day
+        }
+    }
+
+    return count; // Return the total count of beautiful days
+}
+
+int main() {
+    int i, j, k;
+    // Input the values for i, j, and k
+    scanf("%d %d %d", &i, &j, &k);
+    
+    int result = beautifulDays(i, j, k);
+    printf("%d\n", result); // Print the number of beautiful days
+
+    return 0;
+}
