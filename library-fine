@@ -1,0 +1,40 @@
+#include <stdio.h>
+
+int libraryFine(int d1, int m1, int y1, int d2, int m2, int y2) {
+    // Check if the book is returned in a different year
+    if (y1 > y2) {
+        return 10000;
+    } else if (y1 < y2) {
+        return 0;
+    }
+    
+    // Check if the book is returned in a different month within the same year
+    if (m1 > m2) {
+        return 500 * (m1 - m2);
+    } else if (m1 < m2) {
+        return 0;
+    }
+    
+    // Check if the book is returned after the due date within the same month
+    if (d1 > d2) {
+        return 15 * (d1 - d2);
+    }
+    
+    // No fine if the book is returned on or before the due date
+    return 0;
+}
+
+int main() {
+    int d1, m1, y1; // Returned date
+    int d2, m2, y2; // Due date
+    
+    // Read input dates
+    scanf("%d %d %d", &d1, &m1, &y1);
+    scanf("%d %d %d", &d2, &m2, &y2);
+    
+    // Calculate and print the fine
+    int fine = libraryFine(d1, m1, y1, d2, m2, y2);
+    printf("%d\n", fine);
+    
+    return 0;
+}
