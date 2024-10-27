@@ -1,0 +1,49 @@
+#include <stdio.h>
+#include <string.h>
+
+void matchingStrings(char stringList[][100], int stringListSize, char queries[][100], int queriesSize, int result[]) {
+    for (int i = 0; i < queriesSize; i++) {
+        int count = 0;
+        for (int j = 0; j < stringListSize; j++) {
+            if (strcmp(queries[i], stringList[j]) == 0) {
+                count++;
+            }
+        }
+        result[i] = count;
+    }
+}
+
+int main() {
+    int n, q;
+
+    // Read size of stringList
+    scanf("%d", &n);
+    char stringList[n][100];
+
+    // Read strings in stringList
+    for (int i = 0; i < n; i++) {
+        scanf("%s", stringList[i]);
+    }
+
+    // Read size of queries
+    scanf("%d", &q);
+    char queries[q][100];
+
+    // Read queries
+    for (int i = 0; i < q; i++) {
+        scanf("%s", queries[i]);
+    }
+
+    // Array to store results
+    int result[q];
+
+    // Get matching string counts
+    matchingStrings(stringList, n, queries, q, result);
+
+    // Print results
+    for (int i = 0; i < q; i++) {
+        printf("%d\n", result[i]);
+    }
+
+    return 0;
+}
