@@ -1,0 +1,36 @@
+#include <stdio.h>
+
+void gradingStudents(int grades[], int n) {
+    for (int i = 0; i < n; i++) {
+        int grade = grades[i];
+        
+        // Only round if grade is 38 or more
+        if (grade >= 38) {
+            int next_multiple_of_5 = ((grade + 4) / 5) * 5;  // Calculate the next multiple of 5
+            
+            // If the difference is less than 3, round up
+            if (next_multiple_of_5 - grade < 3) {
+                grades[i] = next_multiple_of_5;
+            }
+        }
+        // If grade is less than 38, it remains unchanged
+    }
+}
+
+int main() {
+    int n;
+    scanf("%d", &n);  // Number of students
+    
+    int grades[n];
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &grades[i]);  // Input each grade
+    }
+    
+    gradingStudents(grades, n);
+    
+    for (int i = 0; i < n; i++) {
+        printf("%d\n", grades[i]);  // Output each rounded grade
+    }
+    
+    return 0;
+}
