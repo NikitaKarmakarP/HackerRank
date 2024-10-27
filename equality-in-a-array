@@ -1,0 +1,42 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int equalizeArray(int arr_count, int* arr) {
+    int frequency[101] = {0}; // Assuming the array elements are in the range 1 to 100
+    int max_frequency = 0;
+
+    // Count the frequency of each element
+    for (int i = 0; i < arr_count; i++) {
+        frequency[arr[i]]++;
+        if (frequency[arr[i]] > max_frequency) {
+            max_frequency = frequency[arr[i]]; // Update max_frequency
+        }
+    }
+
+    // Minimum deletions needed
+    return arr_count - max_frequency;
+}
+
+int main() {
+    int n;
+    
+    // Read the number of elements
+    scanf("%d", &n);
+    
+    // Allocate memory for the array
+    int *arr = (int *)malloc(n * sizeof(int));
+    
+    // Read the elements of the array
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &arr[i]);
+    }
+    
+    // Call the function and print the result
+    int result = equalizeArray(n, arr);
+    printf("%d\n", result);
+    
+    // Free allocated memory
+    free(arr);
+    
+    return 0;
+}
