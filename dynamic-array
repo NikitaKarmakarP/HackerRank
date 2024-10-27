@@ -1,0 +1,64 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct {
+    int *array;
+    int size;
+    int capacity;
+} DynamicArray;
+
+void initArray(DynamicArray *a) {
+    a->size = 0;
+    a->capacity = 2;
+    a->array = (int *)malloc(a->capacity * sizeof(int));
+}
+
+void appendToArray(DynamicArray *a, int value) {
+    if (a->size == a->capacity) {
+        a->capacity *= 2;
+        a->array = (int *)realloc(a->array, a->capacity * sizeof(int));
+    }
+    a->array[a->size++] = value;
+}
+
+int main() {
+    int n, q;
+    scanf("%d %d", &n, &q);
+
+    DynamicArray *arr = (DynamicArray *)malloc(n * sizeof(DynamicArray));
+    for (int i = 0; i < n; i++) {
+        initArray(&arr[i]);
+    }
+
+    int lastAnswer = 0;
+    int *results = (int *)malloc(q * sizeof(int));  // To store results of type 2 queries
+    int resultCount = 0;
+
+    for (int i = 0; i < q; i++) {
+        int type, x, y;
+        scanf("%d %d %d", &type, &x, &y);
+        int idx = (x ^ lastAnswer) % n;
+
+        if (type == 1) {
+            appendToArray(&arr[idx], y);
+        } else if (type == 2) {
+            int valueIndex = y % arr[idx].size;
+            lastAnswer = arr[idx].array[valueIndex];
+            results[resultCount++] = lastAnswer;
+        }
+    }
+
+    // Print results for type 2 queries
+    for (int i = 0; i < resultCount; i++) {
+        printf("%d\n", results[i]);
+    }
+
+    // Free allocated memory
+    for (int i = 0; i < n; i++) {
+        free(arr[i].array);
+    }
+    free(arr);
+    free(results);
+
+    return 0;
+}
