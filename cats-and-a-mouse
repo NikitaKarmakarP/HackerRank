@@ -1,0 +1,30 @@
+#include <stdio.h>
+
+// Function to determine which cat catches the mouse
+const char* catAndMouse(int x, int y, int z) {
+    int distanceA = abs(x - z); // Distance from Cat A to Mouse
+    int distanceB = abs(y - z); // Distance from Cat B to Mouse
+
+    if (distanceA < distanceB) {
+        return "Cat A"; // Cat A catches the mouse first
+    } else if (distanceB < distanceA) {
+        return "Cat B"; // Cat B catches the mouse first
+    } else {
+        return "Mouse C"; // Both cats are equidistant, mouse escapes
+    }
+}
+
+int main() {
+    int q; // Number of queries
+    scanf("%d", &q); // Read the number of queries
+    
+    for (int i = 0; i < q; i++) {
+        int x, y, z; // Positions of Cat A, Cat B, and Mouse
+        scanf("%d %d %d", &x, &y, &z); // Read the positions
+
+        // Call the function and print the result
+        printf("%s\n", catAndMouse(x, y, z));
+    }
+
+    return 0;
+}
