@@ -1,0 +1,36 @@
+#include <stdio.h>
+
+int* breakingRecords(int scores[], int n) {
+    static int result[2]; // To store the number of times the records are broken
+    int minScore = scores[0];
+    int maxScore = scores[0];
+    result[0] = 0; // For max records
+    result[1] = 0; // For min records
+
+    for (int i = 1; i < n; i++) {
+        if (scores[i] > maxScore) {
+            maxScore = scores[i];
+            result[0]++; // Increment max record counter
+        } else if (scores[i] < minScore) {
+            minScore = scores[i];
+            result[1]++; // Increment min record counter
+        }
+    }
+
+    return result;
+}
+
+int main() {
+    int n;
+    scanf("%d", &n); // Read the number of games
+    int scores[n]; // Declare an array to store the scores
+
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &scores[i]); // Read the scores
+    }
+
+    int* result = breakingRecords(scores, n); // Call the function
+
+    printf("%d %d\n", result[0], result[1]); // Output the result
+    return 0;
+}
