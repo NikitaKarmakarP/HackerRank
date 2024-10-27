@@ -1,0 +1,39 @@
+#include <stdio.h>
+
+int workbook(int n, int k, int arr[]) {
+    int special_problems_count = 0;
+    int current_page = 1; // Page numbering starts at 1
+    
+    for (int chapter = 0; chapter < n; chapter++) {
+        int problems_in_chapter = arr[chapter];
+        
+        for (int problem_index = 1; problem_index <= problems_in_chapter; problem_index++) {
+            // Check if the current problem is special
+            if (problem_index == current_page) {
+                special_problems_count++;
+            }
+
+            // If the problem is the last on the page, move to the next page
+            if (problem_index % k == 0 || problem_index == problems_in_chapter) {
+                current_page++;
+            }
+        }
+    }
+    
+    return special_problems_count;
+}
+
+int main() {
+    int n, k;
+    scanf("%d %d", &n, &k);
+    int arr[n];
+
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &arr[i]);
+    }
+
+    int result = workbook(n, k, arr);
+    printf("%d\n", result); // Output the number of special problems
+
+    return 0;
+}
