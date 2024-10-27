@@ -1,0 +1,35 @@
+#include <stdio.h>
+
+int jumpingOnClouds(int c[], int n, int k) {
+    int energy = 100; // Initial energy level
+    int position = 0; // Starting position
+
+    do {
+        // Jump to the next cloud
+        position = (position + k) % n;
+        energy--; // Deduct 1 unit of energy for the jump
+
+        // Check if landed on a thundercloud
+        if (c[position] == 1) {
+            energy -= 2; // Deduct 2 additional energy units
+        }
+
+    } while (position != 0); // Continue until back to the start
+
+    return energy;
+}
+
+int main() {
+    int n, k;
+    scanf("%d %d", &n, &k);
+
+    int c[n];
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &c[i]);
+    }
+
+    int remainingEnergy = jumpingOnClouds(c, n, k);
+    printf("%d\n", remainingEnergy);
+
+    return 0;
+}
