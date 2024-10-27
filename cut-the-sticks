@@ -1,0 +1,54 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+void cutTheSticks(int arr[], int n) {
+    // This array will hold the counts of sticks before each cut
+    int* results = malloc(n * sizeof(int));
+    int count = n; // Current count of sticks
+    int index = 0; // To keep track of the number of iterations
+
+    while (count > 0) {
+        // Store the current count of sticks
+        results[index++] = count;
+
+        // Find the minimum stick length
+        int minLength = arr[0];
+        for (int i = 1; i < count; i++) {
+            if (arr[i] < minLength) {
+                minLength = arr[i];
+            }
+        }
+
+        // Cut sticks and filter them
+        int newIndex = 0; // New index for the filtered array
+        for (int i = 0; i < count; i++) {
+            arr[i] -= minLength; // Cut the minimum length from each stick
+            if (arr[i] > 0) {
+                arr[newIndex++] = arr[i]; // Keep only positive lengths
+            }
+        }
+        count = newIndex; // Update count to the new number of sticks
+    }
+
+    // Print the results
+    for (int i = 0; i < index; i++) {
+        printf("%d\n", results[i]);
+    }
+
+    free(results); // Free the allocated memory
+}
+
+int main() {
+    int n; // Number of sticks
+    scanf("%d", &n);
+    
+    int* arr = malloc(n * sizeof(int)); // Allocate memory for stick lengths
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &arr[i]); // Read the stick lengths
+    }
+
+    cutTheSticks(arr, n); // Call the function to process the sticks
+
+    free(arr); // Free the allocated memory
+    return 0;
+}
