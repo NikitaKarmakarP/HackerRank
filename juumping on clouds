@@ -1,0 +1,33 @@
+#include <stdio.h>
+
+int jumpingOnClouds(int c[], int n) {
+    int jumps = 0; // Counter for jumps
+    int i = 0;     // Starting position
+
+    while (i < n - 1) { // Loop until the second last cloud
+        if (i + 2 < n && c[i + 2] == 0) { // Check if a jump of 2 is possible
+            i += 2; // Jump to i + 2
+        } else {
+            i += 1; // Otherwise, jump to i + 1
+        }
+        jumps++; // Increment the jump count
+    }
+
+    return jumps; // Return the total number of jumps
+}
+
+int main() {
+    int n; // Number of clouds
+    scanf("%d", &n);
+
+    int c[n]; // Array of clouds
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &c[i]); // Input each cloud
+    }
+
+    // Call the function and print the result
+    int result = jumpingOnClouds(c, n);
+    printf("%d\n", result);
+
+    return 0;
+}
