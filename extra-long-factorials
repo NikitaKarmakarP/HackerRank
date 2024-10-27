@@ -1,0 +1,38 @@
+#include <stdio.h>
+
+#define MAX_DIGITS 5000 // Define maximum number of digits we need to store
+
+void extraLongFactorials(int n) {
+    int result[MAX_DIGITS];
+    int result_size = 1; // Initialize the result array with the first digit as 1
+    result[0] = 1;       // Factorial of 0 or 1 is 1
+
+    for (int i = 2; i <= n; i++) {
+        int carry = 0; // Initialize carry for multiplication
+        for (int j = 0; j < result_size; j++) {
+            int product = result[j] * i + carry;
+            result[j] = product % 10; // Store last digit of product in result[j]
+            carry = product / 10;     // Carry forward the rest
+        }
+
+        // Process carry and add new digits if necessary
+        while (carry) {
+            result[result_size] = carry % 10;
+            carry /= 10;
+            result_size++;
+        }
+    }
+
+    // Print the result in reverse order as the array stores the result in reverse
+    for (int i = result_size - 1; i >= 0; i--) {
+        printf("%d", result[i]);
+    }
+    printf("\n");
+}
+
+int main() {
+    int n;
+    scanf("%d", &n);
+    extraLongFactorials(n);
+    return 0;
+}
