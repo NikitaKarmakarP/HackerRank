@@ -1,0 +1,33 @@
+#include <stdio.h>
+#include <math.h>
+
+void kaprekarNumbers(int p, int q) {
+    int found = 0;  // Flag to check if any Kaprekar number is found
+
+    for (int i = p; i <= q; i++) {
+        long long square = (long long)i * i;  // Calculate square of i
+        int d = (int)log10(i) + 1;            // Number of digits in i
+
+        long long rightPart = square % (long long)pow(10, d);  // Right part with d digits
+        long long leftPart = square / (long long)pow(10, d);   // Left part with remaining digits
+
+        if (rightPart + leftPart == i) {
+            printf("%d ", i);
+            found = 1;
+        }
+    }
+
+    if (!found) {
+        printf("INVALID RANGE");
+    }
+}
+
+int main() {
+    int p, q;
+    scanf("%d", &p);
+    scanf("%d", &q);
+
+    kaprekarNumbers(p, q);
+
+    return 0;
+}
