@@ -93,8 +93,8 @@ The repository is organized into categories based on problem topics:
 Feel free to reach out or follow me on:
 
 - **GitHub: NikitaKarmakarP**
-- **LinkedIn: Your LinkedIn Profile**
-- **HackerRank: Your HackerRank Profile**
+- **LinkedIn: https://www.linkedin.com/in/nikita-karmakar-31336a270/**
+- **HackerRank: https://www.hackerrank.com/profile/nikitakarmakar81**
   
 ## 💌 Special Thanks
 A big thank you to:
