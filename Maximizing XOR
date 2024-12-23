@@ -1,0 +1,13 @@
+def maximizingXor(l, r):
+    max_xor = 0
+    # Iterate through all pairs (i, j) where l <= i <= r and l <= j <= r
+    for i in range(l, r + 1):
+        for j in range(i, r + 1):
+            max_xor = max(max_xor, i ^ j)
+    return max_xor
+
+# Input handling for competitive programming
+if __name__ == "__main__":
+    l = int(input().strip())
+    r = int(input().strip())
+    print(maximizingXor(l, r))
